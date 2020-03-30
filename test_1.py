@@ -11,6 +11,7 @@ browser.maximize_window()
 # задаём через переменную нужную ссылку и открываем её
 link = "https://yandex.ru/"
 browser.get(link)
+browser.implicitly_wait(5)
 
 
 def do_action(target):

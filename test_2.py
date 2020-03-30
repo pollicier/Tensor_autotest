@@ -11,6 +11,7 @@ browser.maximize_window()
 # заходим на нужный сайт по ссылке link
 link = "https://yandex.ru/"
 browser.get(link)
+browser.implicitly_wait(5)
 
 
 def do_action(target):
