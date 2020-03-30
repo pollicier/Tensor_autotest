@@ -29,8 +29,8 @@ try:
     images_selector = "div.home-arrow__tabs a:nth-child(3)"
     images_link = browser.find_element_by_css_selector(images_selector)
     images_link = images_link.get_attribute("href")
-    browser.get(images_link)
     assert images_link, "Ссылка не найдена"
+    browser.get(images_link)
 
     # кликаем на первую картинку
     first_img_selector = "#main > div > div > div:nth-child(1) > div:nth-child(1) > div > a"
