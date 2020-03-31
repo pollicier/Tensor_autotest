@@ -34,9 +34,6 @@ def do_action(target):
 
 class TestMainPage1(object):
 
-    def __init__(self):
-        pass
-
     def test_find_images_link(self, imgs_selector):
         browser.get(link)
         images_link = browser.find_element_by_css_selector(imgs_selector)

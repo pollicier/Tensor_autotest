@@ -36,9 +36,6 @@ def do_action(target):
 
 class TestMainPage(object):
 
-    def __init__(self):
-        pass
-
     def test_find_search(self, selector, query):
         browser.get(link)
         search = WebDriverWait(browser, 10).until(
