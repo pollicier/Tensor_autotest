@@ -15,7 +15,9 @@ browser.implicitly_wait(5)
 
 
 def do_action(target):
-    target_element = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, target)))
+    target_element = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, target))
+    )
     target_click = browser.find_element_by_css_selector(target)
     action = ActionChains(browser)
     action.click(target_click)
@@ -25,7 +27,6 @@ def do_action(target):
 
 
 try:
-    wait = WebDriverWait(browser, 10)
     # проверяем на наличие ссылку "Картинки"
     images_selector = "div.home-arrow__tabs a:nth-child(3)"
     images_link = browser.find_element_by_css_selector(images_selector)
@@ -39,7 +40,9 @@ try:
 
     # проверяем, открылась ли картинка
     img_selector = "div.cl-viewer-image img"
-    img = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, img_selector)))
+    img = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, img_selector))
+    )
     assert img, "Картинка не найдена"
 
     # достаем ссылку первого изображения для дальнейшего сравнения
@@ -53,7 +56,9 @@ try:
     assert do_action(forward_selector), "Нет кнопки 'вперёд'"
 
     # проверяем, изменилась ли картинка
-    second_img = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, img_selector)))
+    second_img = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, img_selector))
+    )
     second_compared_img = second_img.get_attribute("src")
     assert first_compared_img != second_compared_img, "Изображение не изменилось"
 
@@ -61,7 +66,9 @@ try:
     assert do_action(back_selector), "Нет кнопки 'назад'"
 
     # проверяем, вернулись ли мы к исходной картинке
-    source_img = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, img_selector)))
+    source_img = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, img_selector))
+    )
     source_img_comp = source_img.get_attribute("src")
     assert first_compared_img == source_img_comp, "Изображение не вернулось к исходному"
 

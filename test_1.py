@@ -15,7 +15,9 @@ browser.implicitly_wait(5)
 
 
 def do_action(target):
-    target_element = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, target)))
+    target_element = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, target))
+    )
     target_click = browser.find_element_by_css_selector(target)
     action = ActionChains(browser)
     action.click(target_click)
@@ -26,10 +28,11 @@ def do_action(target):
 
 # чтобы гарантировать корректную работу, используем конструкцию try/finally
 try:
-    wait = WebDriverWait(browser, 10)
     # проверяем наличие поля поиска
     search_selector = ".input__control.input__input"
-    search = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, search_selector)))
+    search = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, search_selector))
+    )
     ActionChains(browser).move_to_element(search).perform()
     assert search, "Поле не найдено"
 
@@ -39,7 +42,9 @@ try:
 
     # проверяем, появилась ли таблица с подсказками
     table_selector = "div.mini-suggest__popup-content"
-    table = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, table_selector)))
+    table = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, table_selector))
+    )
     assert table, "Таблица не найдена"
 
     # находим кнопку "Найти" и жмём на неё
@@ -48,7 +53,9 @@ try:
 
     # проверяем, ведёт ли первая ссылка на сайт tensor.ru
     first_link_selector = "#search-result > li:nth-child(3) > div > h2 > a"
-    first_link_target = wait.until(ec.visibility_of_element_located((By.CSS_SELECTOR, first_link_selector)))
+    first_link_target = WebDriverWait(browser, 10).until(
+        ec.visibility_of_element_located((By.CSS_SELECTOR, first_link_selector))
+    )
     first_url = first_link_target.get_attribute("href")
     compared_value = "https://tensor.ru/"
     assert first_url == compared_value, "Неправильный сайт"
