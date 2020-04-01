@@ -18,10 +18,11 @@ browser = webdriver.Chrome()
 browser.implicitly_wait(10)
 browser.maximize_window()
 
-# задаём через переменную нужную ссылку и открываем её
+# открываем нужную ссылку
 browser.get(link)
 
 
+# создаём функцию для клика по элементу
 def do_action(target):
     target_element = WebDriverWait(browser, 10).until(
         ec.visibility_of_element_located((By.CSS_SELECTOR, target))
@@ -42,7 +43,10 @@ try:
     )
     # наводим курсор на поле поиска
     ActionChains(browser).move_to_element(search).click().perform()
-    assert search, "Поле не найдено"
+    try:
+        assert search, "Поле не найдено"
+    except AssertionError:
+        print("Поле не найдено")
 
     # вводим в поле поиска нужный запрос
     search.send_keys(request)
@@ -51,7 +55,10 @@ try:
     table = WebDriverWait(browser, 10).until(
         ec.visibility_of_element_located((By.CSS_SELECTOR, table_selector))
     )
-    assert table, "Таблица не найдена"
+    try:
+        assert table, "Таблица не найдена"
+    except AssertionError:
+        print("Таблица не найдена")
 
     # находим кнопку "Найти" и жмём на неё
     do_action(find_button_selector)
@@ -65,9 +72,6 @@ try:
         assert first_url == compared_value, "Неправильный сайт"
     except AssertionError:
         print("Неправильный сайт")
-        browser.quit()
-
-    print("All tests passed!")
 
 finally:
     browser.quit()
