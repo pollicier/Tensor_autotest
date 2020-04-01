@@ -11,7 +11,7 @@ request = "тензор"
 search_selector = ".input__control.input__input"
 table_selector = "body > div.mini-suggest__popup"
 find_button_selector = "div.search2__button > button"
-first_link_selector = "li:nth-child(3) h2 > a"
+first_link_selector = "div.organic.bno > h2 > a.i-bem"
 
 # инициализируем драйвер браузера
 browser = webdriver.Chrome()
