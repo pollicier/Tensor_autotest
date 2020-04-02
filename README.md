@@ -12,7 +12,7 @@
 ### Usage
 ***
 1. Install [Python](https://www.python.org/downloads/)
-2. Run command `> pip install - r requirements.txt`> or `> pip install selenium==3.14.0`
+2. Run command `> pip install - r requirements.txt`> or `> pip install selenium==3.141.0`
 3. [ChromeDriver](https://chromedriver.chromium.org/)
 
 ### How to get started
